@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2: SQL Injection Prevention</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .query-box {
+            margin-top: 20px;
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .danger {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        /* 🔹 Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SQL Injection Prevention</h1>
+    <div class="login-container">
+        <h2>Login Simulation</h2>
+        <input type="text" id="username" placeholder="Username (ลอง: admin' OR '1'='1' --)" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="testVulnerable()">ทดสอบ ❌ Vulnerable Query</button>
+        <button onclick="testSecure()">ทดสอบ ✅ Secure Query</button>
+
+        <div class="query-box">
+            <p id="query-output"></p>
+        </div>
+    </div>
+
+    <!-- 🔹 Toast Notification -->
+    <div id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
